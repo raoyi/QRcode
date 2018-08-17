@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#Runing with Python2.7
+#Runing with Python3
 import os
 import sys
 import qrcode
-import Image
-import ConfigParser
+from PIL import Image
+import configparser
 
 if os.path.isfile('CreateQR.ini') == False:
      print('Configuration file not exist!')
      sys.exit(1)
      
 else:     
-     conf = ConfigParser.ConfigParser()
+     conf = configparser.ConfigParser()
      conf.read('CreateQR.ini')
      logfile = conf.get('Config','logfile')
      imgsize = conf.getint('Config','imgsize')

@@ -1,13 +1,12 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#Python2.7 support
+#Python3 supported
+
 import os
 import sys
-import Tkinter
-import ImageTk
+import tkinter
 import qrcode
-import Image
-import ConfigParser
+from PIL import Image, ImageTk
+import configparser
 
 if len(sys.argv) == 1:
      if os.path.isfile('CreateQR.ini') == False:
@@ -15,7 +14,7 @@ if len(sys.argv) == 1:
           sys.exit(1)
 
      else:
-          conf = ConfigParser.ConfigParser()
+          conf = configparser.ConfigParser()
           conf.read('CreateQR.ini')
           logfile = conf.get('Config','logfile')
           imgsize = conf.getint('Config','imgsize')
@@ -31,9 +30,9 @@ if len(sys.argv) == 1:
 
 else:
      log = sys.argv[1]
-     imgsize = 500
-     if len(sys.argv) >= 3 and type(sys.argv[2])==int:
-          imgsize =sys.argv[2]
+     imgsize = 200
+     if len(sys.argv) >= 3:
+          imgsize = int(sys.argv[2])
           
 #change size and output image
 img = qrcode.make(''.join(log))
@@ -41,34 +40,19 @@ img = qrcode.make(''.join(log))
 img = img.resize((imgsize,imgsize), Image.ANTIALIAS)
 
 #create window
-uisize = str(imgsize) + "x" + str(imgsize)
-uidef = uisize + "+10+10"
-imgpos = imgsize/2
+uisize = str(imgsize)+"x"+str(imgsize)
 
-root = Tkinter.Tk()
+root = tkinter.Tk()
+#set window top
+root.wm_attributes('-topmost',1)
+#hide the title bar
 root.overrideredirect(True)
-#root.attributes("-alpha", 0.4)
-root.geometry(uidef)
-canvas = Tkinter.Canvas(root)
-uibg = ImageTk.PhotoImage(img)
-canvas.create_image(imgpos,imgpos,image = uibg)
-canvas.configure(highlightthickness = 0)
-canvas.pack()
-x, y = 0, 0
 
-def move(event):
-    global x,y
-    new_x = (event.x-x)+root.winfo_x()
-    new_y = (event.y-y)+root.winfo_y()
-    s = uisize + "+" + str(new_x)+"+" + str(new_y)
-    root.geometry(s)
-    
-def button_1(event):
-    global x,y
-    x,y = event.x,event.y
-    
-canvas.bind("<B1-Motion>",move)
-canvas.bind("<Button-1>",button_1)
+imglb = ImageTk.PhotoImage(img)
+tkinter.Label(root, image=imglb).pack(side="top")
+
+root.geometry(uisize+"+10+10")
+
 root.mainloop()
 
 sys.exit(0)
