@@ -45,8 +45,13 @@ uidef = uisize + "+10+10"
 imgpos = imgsize/2
 
 root = tkinter.Tk()
+#set window top
+root.wm_attributes('-topmost',1)
+#hide the title bar
 root.overrideredirect(True)
+
 #root.attributes("-alpha", 0.4)
+
 root.geometry(uidef)
 canvas = tkinter.Canvas(root)
 uibg = ImageTk.PhotoImage(img)
