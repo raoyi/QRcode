@@ -4,7 +4,8 @@
 import os
 import sys
 import qrcode
-from PIL import Image
+import tkinter
+from PIL import Image, ImageTk
 import configparser
 
 if len(sys.argv) == 1:
@@ -64,6 +65,51 @@ img = qrcode.make(''.join(log))
 (x,y) = img.size
 img = img.resize((imgsize,imgsize), Image.ANTIALIAS)
 
-img.save(imgadd)
+
+if len(sys.argv) >= 4:
+     if sys.argv[3] == 'w' or sys.argv[3] == 'b':
+          if sys.argv[3] == 'b':
+               img.save(imgadd)
+               
+          #create window
+          uisize = str(imgsize) + "x" + str(imgsize)
+          uidef = uisize + "+10+10"
+          imgpos = imgsize/2
+
+          root = tkinter.Tk()
+          #set window top
+          root.wm_attributes('-topmost',1)
+          #hide the title bar
+          root.overrideredirect(True)
+
+          #root.attributes("-alpha", 0.4)
+
+          root.geometry(uidef)
+          canvas = tkinter.Canvas(root)
+          uibg = ImageTk.PhotoImage(img)
+          canvas.create_image(imgpos,imgpos,image = uibg)
+          canvas.configure(highlightthickness = 0)
+          canvas.pack()
+          x, y = 0, 0
+
+          def move(event):
+               global x,y
+               new_x = (event.x-x)+root.winfo_x()
+               new_y = (event.y-y)+root.winfo_y()
+               s = uisize + "+" + str(new_x)+"+" + str(new_y)
+               root.geometry(s)
+               
+          def button_1(event):
+               global x,y
+               x,y = event.x,event.y
+
+          canvas.bind("<B1-Motion>",move)
+          canvas.bind("<Button-1>",button_1)
+          root.mainloop()
+
+     else:
+          img.save(imgadd)
+else:
+     img.save(imgadd)
 
 sys.exit(0)
