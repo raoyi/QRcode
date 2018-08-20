@@ -54,6 +54,8 @@ else:
      if len(sys.argv) >= 3:
           if (sys.argv[2]).isdigit():
                imgsize = int(sys.argv[2])
+          elif sys.argv[2] == '':
+               imgsize = 200
           else:
                print("argv[2] should be digit.")
                sys.exit(3)
