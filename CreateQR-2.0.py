@@ -83,14 +83,10 @@ if len(sys.argv) >= 4:
           root.wm_attributes('-topmost',1)
           #hide the title bar
           root.overrideredirect(True)
-
-          #root.attributes("-alpha", 0.4)
-
           root.geometry(uidef)
-          canvas = tkinter.Canvas(root)
+          canvas = tkinter.Canvas(root,width=imgsize,height=imgsize,bd=0,highlightthickness=0)
           uibg = ImageTk.PhotoImage(img)
           canvas.create_image(imgpos,imgpos,image = uibg)
-          canvas.configure(highlightthickness = 0)
           canvas.pack()
           x, y = 0, 0
 
@@ -100,7 +96,7 @@ if len(sys.argv) >= 4:
                new_y = (event.y-y)+root.winfo_y()
                s = uisize + "+" + str(new_x)+"+" + str(new_y)
                root.geometry(s)
-               
+
           def button_1(event):
                global x,y
                x,y = event.x,event.y
@@ -108,7 +104,6 @@ if len(sys.argv) >= 4:
           canvas.bind("<B1-Motion>",move)
           canvas.bind("<Button-1>",button_1)
           root.mainloop()
-
      else:
           img.save(imgadd)
 else:
