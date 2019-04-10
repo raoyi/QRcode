@@ -1,4 +1,4 @@
-# QRcode [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/raoyi/QRcode/blob/master/LICENSE)
+# QRcode [![LICENSE](https://img.shields.io/github/license/raoyi/qrcode.svg)](https://github.com/raoyi/QRcode/blob/master/LICENSE)
 
 Create and display QR code according to the text
 
