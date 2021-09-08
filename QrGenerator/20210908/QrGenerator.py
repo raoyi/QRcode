@@ -59,6 +59,13 @@ if os.path.exists(bompath):
             if modelkey+'=' in line:
                 model = line.split('=')[1].replace('\n','').strip()
 
+            if fpkey+'=' in line:
+                fp = line.split('=')[1].replace('\n','').strip()
+                if fp == 'N/A':
+                    fp = 'N'
+                else:
+                    fp = 'Y'
+
             if panelkey+'=' in line:
                 panel = line.split('=')[1].replace('\n','').strip()
                 if panel == 'N/A':
@@ -66,19 +73,18 @@ if os.path.exists(bompath):
                 else:
                     panel = 'Y'
 
-            if 'KBPN'+'=' in line:
-                kbpn = line.split('=')[1].replace('\n','').strip()
-                kbbglflag = kbpn[-3]
-                if kbbglval.count(kbbglflag) != 0:
-                    kbbgl = 'Y'
+            if kbblkey+'=' in line:
+                kbbl = line.split('=')[1].replace('\n','').strip()
+                if kbbl == 'RGB BL' or kbbl == 'BL' or kbbl == 'RGB':
+                    kbbl = 'Y'
                 else:
-                    kbbgl = 'N'
+                    kbbl = 'N'
 
     file.close()
 else:
     error('BOM.BAT NOT EXIST or BOMPATH ERROR!')
 
-strings = separator.join([uutid, model, panel, kbbgl, gskuflag])
+strings = separator.join([model, uutid, fp, panel, kbbl, gskuflag])
 #print(strings)
 
 # set QR
