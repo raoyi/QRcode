@@ -75,7 +75,7 @@ if os.path.exists(bompath):
 
             if kbblkey+'=' in line:
                 kbbl = line.split('=')[1].replace('\n','').strip()
-                if kbbl == 'RGB BL' or kbbl == 'BL' or kbbl == 'RGB':
+                if kbbl == 'BL':
                     kbbl = 'Y'
                 else:
                     kbbl = 'N'
