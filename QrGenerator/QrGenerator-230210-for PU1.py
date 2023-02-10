@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# 基于 221206 版修改
+# 基于 221206 版修改，只要KBSPEC4的值里面包含RGB字符，就显示Y，否则显示N
 import os
 import qrcode
 import tkinter, tkinter.messagebox
