@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# 基于 20221213 版本修改，KBSPEC2由RGB BL改为BL
 import os
 import qrcode
 import tkinter, tkinter.messagebox
