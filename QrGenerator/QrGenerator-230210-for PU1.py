@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# 基于 221206 版修改
 import os
 import qrcode
 import tkinter, tkinter.messagebox
